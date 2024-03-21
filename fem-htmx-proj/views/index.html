@@ -8,8 +8,16 @@
     <script src="https://unpkg.com/htmx.org@1.9.11"></script>
 </head>
 <body>
-    Count {{ .Count }}
-    <button hx-post="/count">Count</button>
+    <div id="count">
+        {{ template "count" . }}
+    </div>
+    <button hx-target="#count" hx-post="/count">Count</button>
 </body>
 </html>
+{{ end }}
+
+{{ block "count" . }}
+    Count {{ .Count }}
+    <!-- target allow you to clarify which element should be received this content after ajax request -->
+    <button hx-target="body" hx-post="/count">Count</button>
 {{ end }}
